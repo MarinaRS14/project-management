@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { FilterValuesType } from './App';
 
 export type Task = {
@@ -26,15 +26,18 @@ function TodoList(props: TodoListPropsType) {
     }
   };
 
-  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setNewTaskTitle(e.target.value);
-  };
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       createTask();
     }
   };
+
+  const onAllClickHandler = () => changeFilter('all');
+  const onCompletedClickHandler = () => changeFilter('completed');
+  const onActiveClickHandler = () => changeFilter('active');
 
   return (
     <div>
@@ -60,9 +63,9 @@ function TodoList(props: TodoListPropsType) {
         })}
       </ul>
       <div>
-        <button onClick={() => changeFilter('all')}>All</button>
-        <button onClick={() => changeFilter('active')}>Active</button>
-        <button onClick={() => changeFilter('completed')}>Completed</button>
+        <button onClick={onAllClickHandler}>All</button>
+        <button onClick={onActiveClickHandler}>Active</button>
+        <button onClick={onCompletedClickHandler}>Completed</button>
       </div>
     </div>
   );
